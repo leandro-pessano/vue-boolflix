@@ -20,8 +20,9 @@
                 <button type="button" @click="searchMovie">Search</button>
             </div>
         </header>
-        <div v-for="movie in results" class="cds-container container">
-            <div class="cd">
+
+        <div class="cds-container container">
+            <div v-for="movie in results" class="cd">
                 <!-- <img :src="" :alt=""> -->
                 <h3> {{movie.title}} </h3>
                 <h4> {{movie.original_title}} </h4>

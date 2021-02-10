@@ -7,6 +7,8 @@ var app = new Vue ({
     apiKey: '4cd9b80fcae998140b009f97c2a03e5d',
     lang: 'it-IT',
     query: '',
+
+    results: []
   },
   mounted() {
 
@@ -22,7 +24,7 @@ var app = new Vue ({
         }
       })
       .then((result) => {
-        console.log(result.data.results);
+        this.results = result.data.results;
       });
     }
   }

@@ -42,7 +42,7 @@ header img {
     flex-basis: 300px;
     padding: 20px;
     margin: 10px 20px;
-    height: 500px;
+    min-height: 600px;
     background: rgb(46, 58, 70);
     text-align: center;
 }

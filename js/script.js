@@ -8,7 +8,8 @@ var app = new Vue ({
     lang: 'it-IT',
     query: '',
 
-    results: []
+    results: [],
+    imgSrc: 'https://image.tmdb.org/t/p/w342/'
   },
   mounted() {
 

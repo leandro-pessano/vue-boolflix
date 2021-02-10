@@ -23,7 +23,8 @@
 
         <div class="cds-container container">
             <div v-for="movie in results" class="cd">
-                <!-- <img :src="" :alt=""> -->
+                <img v-if="movie.poster_path != null" :src="imgSrc + movie.poster_path" :alt="movie.title">
+                <img v-else src="http://italiancinemaaudiences.org/wp-content/themes/trend/assets/img/empty/424x500.png" alt="No Image">
                 <h3> {{movie.title}} </h3>
                 <h4> {{movie.original_title}} </h4>
                 <span class="author"> {{movie.original_language}} </span>

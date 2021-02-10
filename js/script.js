@@ -9,20 +9,21 @@ var app = new Vue ({
     query: '',
   },
   mounted() {
-    axios
-    .get(this.tmdbGet, {
-      params: {
-        this.movieGet,
-        api_key: this.apiKey,
-        language: this.lang,
-        query: this.query
-      }
-    })
-    .then((result) => {
-      
-    });
+
   },
   methods: {
-
+    searchMovie() {
+      axios
+      .get(this.tmdbGet + this.movieGet, {
+        params: {
+          api_key: this.apiKey,
+          language: this.lang,
+          query: this.query
+        }
+      })
+      .then((result) => {
+        console.log(result.data.results);
+      });
+    }
   }
 });

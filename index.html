@@ -8,6 +8,7 @@
       <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" charset="utf-8"></script>
       <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
       <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
@@ -31,7 +32,10 @@
                 <h3> {{movie.title}} </h3>
                 <h4> {{movie.original_title}} </h4>
                 <span class="author"> {{movie.original_language}} </span>
-                <span class="year"> {{movie.vote_average}} </span>
+                <span class="year">
+                  <i v-for="n in Math.ceil(movie.vote_average / 2)" class="fas fa-star"></i>
+                  <i v-for="n in 5 - Math.ceil(movie.vote_average / 2)" class="far fa-star"></i>
+                </span>
             </div>
         </div>
 

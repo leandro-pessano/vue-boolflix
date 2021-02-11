@@ -9,7 +9,7 @@ var app = new Vue ({
     query: '',
 
     results: [],
-    imgSrc: 'https://image.tmdb.org/t/p/w342/'
+    imgSrc: 'https://image.tmdb.org/t/p/w342/',
   },
   mounted() {
 
@@ -27,6 +27,7 @@ var app = new Vue ({
       .then((result) => {
         this.results = result.data.results;
       });
-    }
+    },
+    
   }
 });

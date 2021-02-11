@@ -31,7 +31,7 @@
                 <img v-else src="http://italiancinemaaudiences.org/wp-content/themes/trend/assets/img/empty/424x500.png" alt="No Image">
                 <h3> {{movie.title}} </h3>
                 <h4> {{movie.original_title}} </h4>
-                <span class="author"> {{movie.original_language}} </span>
+                <span v-if="!flags.includes(movie.original_language)" class="author"> {{movie.original_language}} </span> <img v-else :src="'img/' + movie.original_language + '.png'" :alt="movie.original_language">
                 <span class="year">
                   <i v-for="n in Math.ceil(movie.vote_average / 2)" class="fas fa-star"></i>
                   <i v-for="n in 5 - Math.ceil(movie.vote_average / 2)" class="far fa-star"></i>

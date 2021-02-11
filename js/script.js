@@ -10,6 +10,7 @@ var app = new Vue ({
 
     results: [],
     imgSrc: 'https://image.tmdb.org/t/p/w342/',
+    flags: ['de', 'en', 'es', 'fr', 'it', 'ja', 'ko', 'pt']
   },
   mounted() {
 
@@ -28,6 +29,6 @@ var app = new Vue ({
         this.results = result.data.results;
       });
     },
-    
+
   }
 });

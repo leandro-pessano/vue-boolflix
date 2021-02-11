@@ -25,9 +25,22 @@ header {
     height: 70px;
     background: rgb(46, 58, 70);
 }
-header img {
-    height: 50px;
-    margin-top: 10px;
+
+nav.container {
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+
+nav.container h2 {
+  margin: 0 50px;
+  color: lightgrey;
+  cursor: pointer;
+}
+
+nav.container h2.selected {
+  color: white;
+  text-transform: uppercase;
 }
 
 .cds-container {
@@ -35,7 +48,6 @@ header img {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    padding: 100px 0;
 }
 
 .cd {

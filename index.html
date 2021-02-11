@@ -19,19 +19,25 @@
             <div class="container">
               <h1>BoolFlix</h1>
 
-              <input type="text" v-model="query" @keyup.enter="searchMovie">
+              <input type="text" v-model="query" @keyup.enter="searchMovie(); searchSerie()">
 
-              <button type="button" @click="searchMovie">Search</button>
+              <button type="button" @click="searchMovie(); searchSerie()">Search</button>
             </div>
         </header>
+        <nav class="container">
+          <h2 @click="movieClick" :class="(activeMovie) ? 'selected' :''">Film</h2>
+          <h2 @click="serieClick" :class="(activeSerie) ? 'selected' :''">Serie Tv</h2>
+        </nav>
 
-        <div class="cds-container container">
-            <div v-for="movie in results" class="cd">
+        <div v-if="activeMovie" id="movie" class="cds-container container">
+            <div v-for="movie in movieResults" class="cd">
                 <img v-if="movie.poster_path != null" :src="imgSrc + movie.poster_path" :alt="movie.title">
                 <img v-else src="http://italiancinemaaudiences.org/wp-content/themes/trend/assets/img/empty/424x500.png" alt="No Image">
                 <h3> {{movie.title}} </h3>
                 <h4> {{movie.original_title}} </h4>
+
                 <span v-if="!flags.includes(movie.original_language)" class="author"> {{movie.original_language}} </span> <img v-else :src="'img/' + movie.original_language + '.png'" :alt="movie.original_language">
+
                 <span class="year">
                   <i v-for="n in Math.ceil(movie.vote_average / 2)" class="fas fa-star"></i>
                   <i v-for="n in 5 - Math.ceil(movie.vote_average / 2)" class="far fa-star"></i>
@@ -39,6 +45,21 @@
             </div>
         </div>
 
+        <div v-if="activeSerie" id="serie" class="cds-container container">
+            <div v-for="serie in serieResults" class="cd">
+                <img v-if="serie.poster_path != null" :src="imgSrc + serie.poster_path" :alt="serie.name">
+                <img v-else src="http://italiancinemaaudiences.org/wp-content/themes/trend/assets/img/empty/424x500.png" alt="No Image">
+                <h3> {{serie.name}} </h3>
+                <h4> {{serie.original_name}} </h4>
+
+                <span v-if="!flags.includes(serie.original_language)" class="author"> {{serie.original_language}} </span> <img v-else :src="'img/' + serie.original_language + '.png'" :alt="serie.original_language">
+
+                <span class="year">
+                  <i v-for="n in Math.ceil(serie.vote_average / 2)" class="fas fa-star"></i>
+                  <i v-for="n in 5 - Math.ceil(serie.vote_average / 2)" class="far fa-star"></i>
+                </span>
+            </div>
+        </div>
 
       </div>
 

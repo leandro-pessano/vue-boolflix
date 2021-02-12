@@ -29,20 +29,18 @@ var app = new Vue ({
       })
       .then((result) => {
         this.movieResults = result.data.results;
-      });
-    },
-    searchSerie() {
-      axios
-      .get(this.tmdbGet + this.tvGet, {
-        params: {
-          api_key: this.apiKey,
-          language: this.lang,
-          query: this.query
-        }
-      })
-      .then((result) => {
-        this.serieResults = result.data.results;
-        this.results = this.movieResults.concat(this.serieResults);
+          axios
+          .get(this.tmdbGet + this.tvGet, {
+            params: {
+              api_key: this.apiKey,
+              language: this.lang,
+              query: this.query
+            }
+          })
+          .then((result) => {
+            this.serieResults = result.data.results;
+            this.results = this.movieResults.concat(this.serieResults);
+          });
       });
     },
   }

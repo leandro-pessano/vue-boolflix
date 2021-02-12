@@ -30,7 +30,9 @@ var app = new Vue ({
       })
       .then((result) => {
         this.movieResults = result.data.results;
-        this.results = this.movieResults;
+        if (this.active == 0) {
+          this.results = this.movieResults;
+        }
       });
     },
     searchSerie() {

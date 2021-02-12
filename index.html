@@ -19,14 +19,14 @@
             <div class="container">
               <h1>BoolFlix</h1>
 
-              <input type="text" v-model="query" @keyup.enter="searchMovie()">
+              <input type="text" v-model="query" @keyup.enter="searchMovie(); searchSerie()">
 
-              <button type="button" @click="searchMovie()">Search</button>
+              <button type="button" @click="searchMovie(); searchSerie()">Search</button>
             </div>
         </header>
         <nav class="container">
-          <h2>Film</h2>
-          <h2>Serie Tv</h2>
+          <h2 @click="onlyMovie" :class="(!active) ? 'active' :''">Film</h2>
+          <h2 @click="onlySerie" :class="(active) ? 'active' :''">Serie Tv</h2>
         </nav>
 
         <div class="cds-container container">

@@ -38,7 +38,7 @@ nav.container h2 {
   cursor: pointer;
 }
 
-nav.container h2.selected {
+nav.container h2.active {
   color: white;
   text-transform: uppercase;
 }

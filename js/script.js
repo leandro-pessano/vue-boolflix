@@ -13,6 +13,7 @@ var app = new Vue ({
     results: [],
     imgSrc: 'https://image.tmdb.org/t/p/w342/',
     flags: ['de', 'en', 'es', 'fr', 'it', 'ja', 'ko', 'pt'],
+    active: ''
   },
   mounted() {
 
@@ -29,19 +30,32 @@ var app = new Vue ({
       })
       .then((result) => {
         this.movieResults = result.data.results;
-          axios
-          .get(this.tmdbGet + this.tvGet, {
-            params: {
-              api_key: this.apiKey,
-              language: this.lang,
-              query: this.query
-            }
-          })
-          .then((result) => {
-            this.serieResults = result.data.results;
-            this.results = this.movieResults.concat(this.serieResults);
-          });
+        this.results = this.movieResults;
       });
     },
+    searchSerie() {
+      axios
+      .get(this.tmdbGet + this.tvGet, {
+        params: {
+          api_key: this.apiKey,
+          language: this.lang,
+          query: this.query
+        }
+      })
+      .then((result) => {
+        this.serieResults = result.data.results;
+        if (this.active == 1) {
+          this.results = this.serieResults;
+        }
+      });
+    },
+    onlyMovie() {
+      this.results = this.movieResults
+      this.active = 0;
+    },
+    onlySerie() {
+      this.results = this.serieResults
+      this.active = 1;
+    }
   }
 });

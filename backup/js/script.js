@@ -10,9 +10,10 @@ var app = new Vue ({
 
     movieResults: [],
     serieResults: [],
-    results: [],
     imgSrc: 'https://image.tmdb.org/t/p/w342/',
     flags: ['de', 'en', 'es', 'fr', 'it', 'ja', 'ko', 'pt'],
+    activeMovie: true,
+    activeSerie: false
   },
   mounted() {
 
@@ -42,8 +43,15 @@ var app = new Vue ({
       })
       .then((result) => {
         this.serieResults = result.data.results;
-        this.results = this.movieResults.concat(this.serieResults);
       });
     },
+    serieClick() {
+      this.activeMovie = false;
+      this.activeSerie = true;
+    },
+    movieClick() {
+      this.activeSerie = false;
+      this.activeMovie = true;
+    }
   }
 });

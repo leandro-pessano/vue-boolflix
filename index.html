@@ -32,7 +32,7 @@
                   <option v-if="active" v-for="genre in serieGenres" :value="genre.id">{{genre.name}}</option>
                 </select>
 
-                <input type="text" v-model="query" @keyup.enter="search()">
+                <input type="text" v-model="query" @keyup.enter="search(); getCast()">
 
                 <i @click="search()" class="fas fa-search"></i>
               </div>
@@ -61,6 +61,17 @@
                 </div>
 
                 <small class="or_title"> {{e.original_title || e.original_name}} </small>
+              </div>
+
+              <div class="generi">
+                <span v-for="(id, i) in e.genre_ids">
+                  <span v-if="!active" v-for="genre in movieGenres">{{(id == genre.id && i != e.genre_ids.length-1) ? genre.name + ', ' : (id == genre.id && i == e.genre_ids.length-1) ? genre.name : ''}}</span>
+
+                  <span v-if="active" v-for="genre in serieGenres">{{(id == genre.id && i != e.genre_ids.length-1) ? genre.name + ', ' : (id == genre.id && i == e.genre_ids.length-1) ? genre.name : ''}}</span>
+                </span>
+              </div>
+
+              <div class="cast">
 
               </div>
 

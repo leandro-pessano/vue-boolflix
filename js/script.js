@@ -29,9 +29,6 @@ var app = new Vue ({
       })
       .then((result) => {
         this.movieGenres = result.data.genres;
-        this.movieGenres.forEach((e, i) => {
-          this.allGenres.push(e)
-        });
       })
       axios
       .get('https://api.themoviedb.org/3/genre/' + this.tvGet + '/list', {
@@ -42,9 +39,6 @@ var app = new Vue ({
       })
       .then((result) => {
         this.serieGenres = result.data.genres;
-        this.serieGenres.forEach((e, i) => {
-          this.allGenres.push(e)
-        });
       })
   },
   methods: {
@@ -88,6 +82,18 @@ var app = new Vue ({
       this.results = this.serieResults;
       this.active = 1;
       this.selectedGenre = 'All';
-    }
+    },
+    // getCast() {
+    //   this.results.forEach((e, i) => {
+    //     axios
+    //     .get('https://api.themoviedb.org/3/movie/' + e.id + '/credits?api_key=4cd9b80fcae998140b009f97c2a03e5d&language=it-IT')
+    //     .then((result) => {
+    //       this.results.forEach((e, i) => {
+    //           e.cast = result.data.cast;
+    //       });
+    //     });
+    //   });
+    //   console.log(this.results);
+    // }
   }
 });

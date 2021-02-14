@@ -172,7 +172,13 @@ nav.container h2.active {
   color: white;
 }
 
-.poster .overview {
+.details .generi {
+  font-size: 10px;
+  font-style: italic;
+  color: lightgrey;
+}
+
+.poster .details .overview {
   margin-top: 10px;
   padding: 0 4px;
   height: 100%;

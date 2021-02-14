@@ -17,33 +17,60 @@
 
         <header>
             <div class="container">
-              <h1>BoolFlix</h1>
 
-              <input type="text" v-model="query" @keyup.enter="searchMovie(); searchSerie()">
+              <nav class="container">
+                <h1>BoolFlix</h1>
+                <h2 @click="onlyMovie" :class="(!active) ? 'active' :''">film</h2>
+                <h2 @click="onlySerie" :class="(active) ? 'active' :''">serie tv</h2>
+              </nav>
 
-              <button type="button" @click="searchMovie(); searchSerie()">Search</button>
+              <div class="search">
+
+                <select :class="(selectedGenre != 'All') ? 'white' : ''" v-model="selectedGenre">
+                  <option value="All">All</option>
+                  <option v-if="!active" v-for="genre in movieGenres" :value="genre.id">{{genre.name}}</option>
+                  <option v-if="active" v-for="genre in serieGenres" :value="genre.id">{{genre.name}}</option>
+                </select>
+
+                <input type="text" v-model="query" @keyup.enter="search()">
+
+                <i @click="search()" class="fas fa-search"></i>
+              </div>
+
             </div>
         </header>
-        <nav class="container">
-          <h2 @click="onlyMovie" :class="(!active) ? 'active' :''">Film</h2>
-          <h2 @click="onlySerie" :class="(active) ? 'active' :''">Serie Tv</h2>
-        </nav>
 
-        <div class="cds-container container">
-            <div v-for="e in results" class="cd">
-                <img v-if="e.poster_path != null" :src="imgSrc + e.poster_path" :alt="e.title">
-                <img v-else src="http://italiancinemaaudiences.org/wp-content/themes/trend/assets/img/empty/424x500.png" alt="No Image">
+        <main class="posters-container container">
+
+          <div v-if="selectedGenre == 'All' || e.genre_ids.includes(selectedGenre)" v-for="e in results" class="poster">
+              <img v-if="e.poster_path != null" :src="imgSrc + e.poster_path" :alt="e.title">
+              <img v-else src="img/no_image.png" alt="No Image">
+
+            <div class="details">
+
+              <div>
                 <h3> {{e.title || e.name}} </h3>
-                <h4> {{e.original_title || e.original_name}} </h4>
 
-                <span v-if="!flags.includes(e.original_language)" class="author"> {{e.original_language}} </span> <img v-else :src="'img/' + e.original_language + '.png'" :alt="e.original_language">
-
-                <span class="year">
+                <div class="vote">
                   <i v-for="n in Math.ceil(e.vote_average / 2)" class="fas fa-star"></i>
                   <i v-for="n in 5 - Math.ceil(e.vote_average / 2)" class="far fa-star"></i>
-                </span>
+                </div>
+
+                <div>
+                  <span v-if="!flags.includes(e.original_language)" class="or_lang"> {{e.original_language}} </span> <img v-else :src="'img/' + e.original_language + '.png'" :alt="e.original_language">
+                </div>
+
+                <small class="or_title"> {{e.original_title || e.original_name}} </small>
+
+              </div>
+
+              <div class="overview">
+                {{e.overview}}
+              </div>
+
             </div>
-        </div>
+          </div>
+        </main>
 
       </div>
 

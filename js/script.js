@@ -11,15 +11,44 @@ var app = new Vue ({
     movieResults: [],
     serieResults: [],
     results: [],
+    movieGenres : [],
+    serieGenres: [],
+    allGenres: [],
+    selectedGenre: 'All',
     imgSrc: 'https://image.tmdb.org/t/p/w342/',
     flags: ['de', 'en', 'es', 'fr', 'it', 'ja', 'ko', 'pt'],
     active: ''
   },
   mounted() {
-
+      axios
+      .get('https://api.themoviedb.org/3/genre/' + this.movieGet + '/list', {
+        params: {
+          api_key: this.apiKey,
+          language: this.lang,
+        }
+      })
+      .then((result) => {
+        this.movieGenres = result.data.genres;
+        this.movieGenres.forEach((e, i) => {
+          this.allGenres.push(e)
+        });
+      })
+      axios
+      .get('https://api.themoviedb.org/3/genre/' + this.tvGet + '/list', {
+        params: {
+          api_key: this.apiKey,
+          language: this.lang,
+        }
+      })
+      .then((result) => {
+        this.serieGenres = result.data.genres;
+        this.serieGenres.forEach((e, i) => {
+          this.allGenres.push(e)
+        });
+      })
   },
   methods: {
-    searchMovie() {
+    search() {
       axios
       .get(this.tmdbGet + this.movieGet, {
         params: {
@@ -34,8 +63,6 @@ var app = new Vue ({
           this.results = this.movieResults;
         }
       });
-    },
-    searchSerie() {
       axios
       .get(this.tmdbGet + this.tvGet, {
         params: {
@@ -50,14 +77,17 @@ var app = new Vue ({
           this.results = this.serieResults;
         }
       });
+      this.selectedGenre = 'All';
     },
     onlyMovie() {
-      this.results = this.movieResults
+      this.results = this.movieResults;
       this.active = 0;
+      this.selectedGenre = 'All';
     },
     onlySerie() {
-      this.results = this.serieResults
+      this.results = this.serieResults;
       this.active = 1;
+      this.selectedGenre = 'All';
     }
   }
 });
